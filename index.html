@@ -1,0 +1,54 @@
+<html>
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+		<link rel="stylesheet" href="styles.css">
+	</head>
+	<body>
+		<div class="row">
+			<div class="title">
+				<h1>Visualizing Continued Fractions</h1>
+			</div>
+		</div>
+		<!-- <div class="row">
+			<div class="col-sm-4"></div>
+			<div class="col-sm-4">
+			</div>
+		</div> -->
+		<div class="row">
+			<div class="col-sm-12 container" id="canvasContainer">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-1">
+			</div>
+			<div class="col-sm-4">
+				<h5> Choose a number to visualize... </h5>
+				<div class="input-group">
+					<input type="number"class="form-control" id="input_num" placeholder="Number to Visualize...">
+					<span class="input-group-btn">
+						<button type="button" class="btn btn-primary" id="num_pi">&#960;</button>
+						<button type="button" class="btn btn-primary" id="num_e">e</button>
+						<button type="button" class="btn btn-primary" id="num_phi">&#981;</button>
+					</span>
+				</div>
+			</div>
+			<div class="col-sm-1">
+			</div>
+			<div class="col-sm-5 container" id="controllerContainer">
+				<h5> Or animate through a set of numbers </h5>
+				<div class = "input-group">
+					<input type="number"class="form-control" id="low_num" placeholder="Low"/>
+					<span class="input-group-addon">&#8804 n &#8804</span>
+					<input type="number"class="form-control" id="hi_num" placeholder="High">
+					<span class="input-group-addon">every</span>
+					<input type="number"class="form-control" id="by_num" placeholder="Granularity">
+					<span class="input-group-btn">
+						<button type="button" class="btn btn-primary" id="animate">Animate</button>
+					</span>
+				</div>
+			</div>
+		</div>
+		<script src="main.js"></script>
+	</body>
+</html>
