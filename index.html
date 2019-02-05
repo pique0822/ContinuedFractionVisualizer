@@ -10,43 +10,41 @@
 				<h1>Visualizing Continued Fractions</h1>
 			</div>
 		</div>
-		<!-- <div class="row">
-			<div class="col-sm-4"></div>
-			<div class="col-sm-4">
-			</div>
-		</div> -->
-		<div class="row">
-			<div class="col-sm-12 container" id="canvasContainer">
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-1">
-			</div>
-			<div class="col-sm-4">
-				<h5> Choose a number to visualize... </h5>
-				<div class="input-group">
-					<input type="number"class="form-control" id="input_num" placeholder="Number to Visualize...">
-					<span class="input-group-btn">
+		<div class="row title">
+				<div class="form-group form-inline">
+					<label> Visualizing </label>
+					<input type="number"class="form-control inputs" id="input_num" placeholder="Number to Visualize..." value=1.234321>
+					<label> up to </label>
+					<input type="number"class="form-control inputs" id="precise_num" value=10 placeholder="Precision">
+					<label> terms. </label>
+					<span class="form-group-btn">
 						<button type="button" class="btn btn-primary" id="num_pi">&#960;</button>
 						<button type="button" class="btn btn-primary" id="num_e">e</button>
 						<button type="button" class="btn btn-primary" id="num_phi">&#981;</button>
 					</span>
-				</div>
 			</div>
-			<div class="col-sm-1">
-			</div>
-			<div class="col-sm-5 container" id="controllerContainer">
+			<!-- <div class="col-sm-3 container" id="controllerContainer">
 				<h5> Or animate through a set of numbers </h5>
 				<div class = "input-group">
 					<input type="number"class="form-control" id="low_num" placeholder="Low"/>
 					<span class="input-group-addon">&#8804 n &#8804</span>
 					<input type="number"class="form-control" id="hi_num" placeholder="High">
 					<span class="input-group-addon">every</span>
-					<input type="number"class="form-control" id="by_num" placeholder="Granularity">
+					<input type="number"class="form-control" id="by_num" placeholder="Delta">
 					<span class="input-group-btn">
 						<button type="button" class="btn btn-primary" id="animate">Animate</button>
 					</span>
 				</div>
+			</div> -->
+		</div>
+		<div class="row">
+			<div class="col-sm-12 container" id="canvasContainer">
+			</div>
+		</div>
+		<div class="row title">
+				<div class="form-group">
+					<label>List representation of the continued fraction. Change the sequence and see what happens.</label>
+					<input type="text"class="form-control inputs" id="list_fraction" placeholder="[]" value=[]>
 			</div>
 		</div>
 		<script src="main.js"></script>

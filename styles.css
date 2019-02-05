@@ -36,6 +36,19 @@
 	text-align: center;
 }
 
+.inputs{
+  border: 0;
+  box-shadow: none;
+  text-align: center;
+}
+#list_fraction{
+  width:100%;
+}
+
+body{
+  padding: 2.5%;
+}
+
 canvas{
   box-sizing: content-box;
 }

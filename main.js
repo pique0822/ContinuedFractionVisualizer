@@ -6,17 +6,32 @@ function sleep(milliseconds) {
     }
   }
 }
-
 function gen_step(x){
 	return [x-x%1,x%1];
 }
 
 function convergent_n(x,n){
-  epsilon = .00001;
+  if(x==Math.E)
+  {
+    return [2,1,2,1,1,4,1,1,6,1,1,8,1,1,10,1,1,12,1,1,14,1,1,
+   16,1,1,18,1,1,20,1,1,22,1,1,24,1,1,26,1,1,28,1,1,
+   30,1,1,32,1,1,34,1,1,36,1,1,38,1,1,40,1,1,42,1,1,
+   44,1,1,46,1,1,48,1,1,50,1,1,52,1,1,54,1,1,56,1,1,
+   58,1,1,60,1,1,62,1,1,64,1,1,66].slice(0,n)
+  }
+  if(x==Math.PI)
+  {
+    return [3,7,15,1,292,1,1,1,2,1,3,1,14,2,1,1,2,2,2,2,1,84,2,1,1,15,3,13,1,4,2,6,6,99,1,2,2,6,3,5,1,1,6,8,1,7,1,2,3,7,1,2,1,1,12,1,1,1,3,1,1,8,1,1,2,1,6,1,1,5,2,2,3,1,2,4,4,16,1,161,45,1,22,1,2,2,1,4,1,2,24,1,2,1,3,1,2,1,1,10].slice(0,n)
+  }
+  if(x==(1+Math.sqrt(5))/2)
+  {
+    return [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1].slice(0,n);
+  }
+  epsilon = .000001;
   steps = [];
-  nxt = 1/x;
+  nxt = precision(1/x);
   for(var i = 0; i <n; i++){
-    arr = gen_step(1/nxt);
+    arr = gen_step(precision(1/nxt));
 		ni = arr[0]
 		nxt = arr[1]
     steps.push(ni);
@@ -27,15 +42,13 @@ function convergent_n(x,n){
 
 function continued_frac(steps){
   if(steps.length == 1){return steps[0];}
-  return steps[0] + 1/continued_frac(steps.slice(1));
+  return steps[0] + precision(1/continued_frac(steps.slice(1)));
 }
 
-function draw_continued_fraction(n){
+function draw_continued_fraction(steps){
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	ctx.fillStyle = background;
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-	steps = convergent_n(n,1000);
 	console.log(steps);
 
 	multiplier = 1;
@@ -119,25 +132,82 @@ function draw_continued_fraction(n){
 	ctx.closePath();
 }
 
-$("#input_num").change(function(){
+function precision(x){
+  var precise = x.toPrecision(100);
+  last_val = precise.indexOf("0000000000");
+  if(last_val == -1)
+  {
+    last_val = precise.length;
+  }
+  precise = precise.substring(0,last_val);
+  return parseFloat(precise);
+}
+
+$("#input_num").on('input', function() {
 	console.log($("#input_num").val());
-	draw_continued_fraction($("#input_num").val());
+  steps = convergent_n($("#input_num").val(),$("#precise_num").val());
+  $("#list_fraction").val("["+steps.toString()+"]");
+  draw_continued_fraction(steps);
+});
+
+$("#precise_num").on('input', function() {
+	console.log($("#input_num").val());
+  steps = convergent_n($("#input_num").val(),$("#precise_num").val());
+  $("#list_fraction").val("["+steps.toString()+"]");
+  draw_continued_fraction(steps);
 });
 
 $("#num_pi").click(function(){
 	$("#input_num").val(Math.PI);
-	draw_continued_fraction($("#input_num").val())
+  steps = [3,7,15,1,292,1,1,1,2,1,3,1,14,2,1,1,2,2,2,2,1,84,2,1,1,15,3,13,1,4,2,6,6,99,1,2,2,6,3,5,1,1,6,8,1,7,1,2,3,7,1,2,1,1,12,1,1,1,3,1,1,8,1,1,2,1,6,1,1,5,2,2,3,1,2,4,4,16,1,161,45,1,22,1,2,2,1,4,1,2,24,1,2,1,3,1,2,1,1,10];
+  steps = steps.slice(0,$("#precise_num").val())
+  $("#list_fraction").val("["+steps.toString()+"]");
+  draw_continued_fraction(steps);
 });
 
 $("#num_e").click(function(){
 	$("#input_num").val(Math.E);
-	draw_continued_fraction($("#input_num").val())
+  steps = [2,1,2,1,1,4,1,1,6,1,1,8,1,1,10,1,1,12,1,1,14,1,1,
+ 16,1,1,18,1,1,20,1,1,22,1,1,24,1,1,26,1,1,28,1,1,
+ 30,1,1,32,1,1,34,1,1,36,1,1,38,1,1,40,1,1,42,1,1,
+ 44,1,1,46,1,1,48,1,1,50,1,1,52,1,1,54,1,1,56,1,1,
+ 58,1,1,60,1,1,62,1,1,64,1,1,66]
+ steps = steps.slice(0,$("#precise_num").val())
+ $("#list_fraction").val("["+steps.toString()+"]");
+  draw_continued_fraction(steps);
 });
 
 $("#num_phi").click(function(){
 	var phi = (1 + Math.sqrt(5))/2;
 	$("#input_num").val(phi);
-	draw_continued_fraction($("#input_num").val())
+  steps = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
+  steps = steps.slice(0,$("#precise_num").val());
+  $("#list_fraction").val("["+steps.toString()+"]");
+  draw_continued_fraction(steps);
+});
+
+$("#list_fraction").on('input', function() {
+  console.log(parseInt($("#list_fraction").attr('size'),10));
+  input = $("#list_fraction").val();
+  if(input[0] == "[" && input[input.length-1] == "]")
+  {
+    input = input.replace("[","");
+    input = input.replace("]","");
+    try{
+      var steps = input.split(',').map(Number);
+      draw_continued_fraction(steps);
+      var new_num = continued_frac(steps);
+      if(new_num == "Infinity")
+      {
+        console.log('INFINITE');
+        new_num = 99999999999;
+      }
+      $("#input_num").val(new_num);
+    } catch(error)
+    {
+      console.log(error);
+    }
+  }
 });
 
 red = "#e74c3c";
@@ -281,4 +351,10 @@ $("#animate").click(function(){
 		}
 	}
 	requestAnimationFrame(animated_continued_fraction);
+});
+
+$(document).ready(function(){
+  steps = convergent_n($("#input_num").val(),$("#precise_num").val());
+  draw_continued_fraction(steps);
+  $("#list_fraction").val("["+steps.toString()+"]");
 });
