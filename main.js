@@ -210,6 +210,18 @@ $("#list_fraction").on('input', function() {
   }
 });
 
+$(".whatsthis").on('click', function() {
+  if($(".dropdown").hasClass('hidden'))
+  {
+    $(".whatsthis").html("Hide");
+    $(".dropdown").removeClass('hidden');
+  }
+	else{
+    $(".whatsthis").html("What is this?");
+    $(".dropdown").addClass('hidden');
+  }
+});
+
 red = "#e74c3c";
 green = "#2ecc71";
 blue = "#3498db";

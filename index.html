@@ -5,46 +5,68 @@
 		<link rel="stylesheet" href="styles.css">
 	</head>
 	<body>
-		<div class="row">
-			<div class="title">
-				<h1>Visualizing Continued Fractions</h1>
-			</div>
-		</div>
-		<div class="row title">
-				<div class="form-group form-inline">
-					<label> Visualizing </label>
-					<input type="number"class="form-control inputs" id="input_num" placeholder="Number to Visualize..." value=1.234321>
-					<label> up to </label>
-					<input type="number"class="form-control inputs" id="precise_num" value=10 placeholder="Precision">
-					<label> terms. </label>
-					<span class="form-group-btn">
-						<button type="button" class="btn btn-primary" id="num_pi">&#960;</button>
-						<button type="button" class="btn btn-primary" id="num_e">e</button>
-						<button type="button" class="btn btn-primary" id="num_phi">&#981;</button>
-					</span>
-			</div>
-			<!-- <div class="col-sm-3 container" id="controllerContainer">
-				<h5> Or animate through a set of numbers </h5>
-				<div class = "input-group">
-					<input type="number"class="form-control" id="low_num" placeholder="Low"/>
-					<span class="input-group-addon">&#8804 n &#8804</span>
-					<input type="number"class="form-control" id="hi_num" placeholder="High">
-					<span class="input-group-addon">every</span>
-					<input type="number"class="form-control" id="by_num" placeholder="Delta">
-					<span class="input-group-btn">
-						<button type="button" class="btn btn-primary" id="animate">Animate</button>
-					</span>
+		<div class="full">
+			<div class="row top">
+				<div class="title">
+					<h1>Visualizing Continued Fractions</h1>
 				</div>
-			</div> -->
-		</div>
-		<div class="row">
-			<div class="col-sm-12 container" id="canvasContainer">
 			</div>
-		</div>
-		<div class="row title">
-				<div class="form-group">
-					<label>List representation of the continued fraction. Change the sequence and see what happens.</label>
-					<input type="text"class="form-control inputs" id="list_fraction" placeholder="[]" value=[]>
+			<div class="whatsthis">What is this?</div>
+			<div class="dropdown hidden">
+				<p>In simple terms, continued fractions are a way of representing real numbers. In the case of this project, I went with <i>simple continued fraction</i> which are fractions of the form: <br><center><img src="continued_frac.png" alt="Continued Fraction Image"></center><br> Equivalently we could represent the fraction as the sequence [a<sub>0</sub>,a<sub>1</sub>,a<sub>2</sub>,...].
+				<br><br>
+				The representation below uses the latter representation to generate the images. The algorithm to draw the image is as follows.
+				<br><br>
+				Let A = [a<sub>0</sub>,a<sub>1</sub>,a<sub>2</sub>,...] which represents the number n as a simple continued fraction. We begin drawing at (x,y) = (0,0).
+				<br><br>
+				We then consider the i<super>th</super> term: if i(mod 4) = 0 we draw a red line from (x,y) to (x+a<sub>i</sub>,y),if i(mod 4) = 1 we draw a green line from (x,y) to (x,y-a<sub>i</sub>),if i(mod 4) = 2 we draw a blue line from (x,y) to (x-a<sub>i</sub>,y),if i(mod 4) = 3 we draw a orange line from (x,y) to (x,y+a<sub>i</sub>).
+				<br><br>
+				In the ideal case, the patterns that are generated would be perfect but due to computational constraints of JavaScript, ther is some amount of error on each computation - therefore for the best results input the simple continued fraction as a list at the bottom or click one of the buttons of irrational numbers (which are precomputed up to 100 convergent terms).
+				<br><br>
+				I do not claim to know everything about continued fractions but the little I do know I understood from <a href="http://www.d.umn.edu/~jgreene/masters_reports/Sam%20J%20Thesis.pdf">
+				 this paper </a> and the <a href="https://en.wikipedia.org/wiki/Continued_fraction">
+ 				 Wikipedia </a> on the subject (Wikipedia is also where I got the image above).
+				 <br><br>
+				 If you have any suggestions or questions about what I did, feel free to email me at <a>drmiguel@mit.edu</a>.
+				</p>
+			</div>
+			<div class="row title">
+					<div class="form-group form-inline">
+						<label> Visualizing </label>
+						<input type="number"class="form-control inputs" id="input_num" placeholder="Number to Visualize..." value=1.234321>
+						<label> up to </label>
+						<input type="number"class="form-control inputs" id="precise_num" value=10 placeholder="Precision">
+						<label> convergents. </label>
+					</div>
+						<span class="form-group-btn">
+							<button type="button" class="btn btn-primary" id="num_pi">&#960;</button>
+							<button type="button" class="btn btn-primary" id="num_e">e</button>
+							<button type="button" class="btn btn-primary" id="num_phi">&#981;</button>
+						</span>
+				<!-- </div> -->
+				<!-- <div class="col-sm-3 container" id="controllerContainer">
+					<h5> Or animate through a set of numbers </h5>
+					<div class = "input-group">
+						<input type="number"class="form-control" id="low_num" placeholder="Low"/>
+						<span class="input-group-addon">&#8804 n &#8804</span>
+						<input type="number"class="form-control" id="hi_num" placeholder="High">
+						<span class="input-group-addon">every</span>
+						<input type="number"class="form-control" id="by_num" placeholder="Delta">
+						<span class="input-group-btn">
+							<button type="button" class="btn btn-primary" id="animate">Animate</button>
+						</span>
+					</div>
+				</div> -->
+			</div>
+			<div class="row">
+				<div class="col-sm-12 container" id="canvasContainer">
+				</div>
+			</div>
+			<div class="row title">
+					<div class="form-group">
+						<label>List representation of the continued fraction. Change the sequence and see what happens.</label>
+						<input type="text"class="form-control inputs" id="list_fraction" placeholder="[]" value=[]>
+				</div>
 			</div>
 		</div>
 		<script src="main.js"></script>
